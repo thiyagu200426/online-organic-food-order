@@ -595,3 +595,7 @@ logger = logging.getLogger(__name__)
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+from fastapi.staticfiles import StaticFiles
+
+# Serve the React build folder
+app.mount("/", StaticFiles(directory="../frontend/build", html=True), name="frontend")
